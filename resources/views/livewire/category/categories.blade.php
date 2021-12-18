@@ -38,7 +38,7 @@
                                             <i class="fas fa-edit"></i>
                                         </a>
                                         <a href="javascript:void(0);" 
-                                        onclick="Confirm('{{ $cetegory->id }}')"
+                                        onclick="Confirm('{{ $category->id }}')"
                                         class="btn btn-dark" title="Delete">
                                             <i class="fas fa-trash"></i>
                                         </a>
@@ -52,7 +52,7 @@
             </div>
         </div>
     </div>
-    include form
+    @include('livewire.category.form')
 </div>
 
 <script>
