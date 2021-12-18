@@ -15,7 +15,7 @@ class CategoriesController extends Component
     use WithPagination;
 
     public $name, $search, $image, $selected_id, $pageTitle, $componentName;
-    private $pagination = 5;
+    private $pagination = 2;
 
     // Para inicializar propiedades que se van a renderizar en la vista principal del componente
     public function mount(){
@@ -23,9 +23,17 @@ class CategoriesController extends Component
          $this->componentName = 'Categorías';
     }
 
+    public function paginationView(){
+        return 'vendor.livewire.bootstrap';
+    }
+
     public function render()
     {
-        $data = Category::all();
+        if(strlen($this->search) > 0){
+            $data = Category::where('name', 'like', '%' . $this->search . '%')->paginate($this->pagination);
+        }else{
+            $data = Category::orderBy('id', 'desc')->paginate($this->pagination);
+        }
 
         return view('livewire.category.categories', ['categories' => $data])
             ->extends('layouts.theme.app')

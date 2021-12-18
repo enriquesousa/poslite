@@ -8,7 +8,7 @@
                     <li><a href="javascript:void(0);" class="tabmenu bg-dark" data-toggle="modal" data-target="#theModal">Agregar</a></li>
                 </ul>
             </div>
-            search
+            @include('common.searchbox')
             <div class="widget-content">
 
                 <div class="table-responsive">
@@ -47,7 +47,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    pagination
+                    {{ $categories->links() }}
                 </div>
             </div>
         </div>
