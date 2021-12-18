@@ -17,7 +17,7 @@
                             <tr>
                                 <th class="table-th text-white">DESCRIPCIÓN</th>
                                 <th class="table-th text-center text-white">IMAGEN</th>
-                                <th class="table-th text-center text-white">ACCIONES</th>
+                                <th class="table-th text-center text-white">ACTIONS</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -34,6 +34,7 @@
                                     <a href="javascript:void(0);" class="btn btn-dark mtmobile" title="Edit">
                                         <i class="fas fa-edit"></i>
                                     </a>
+
                                     <a href="javascript:void(0);" class="btn btn-dark" title="Delete">
                                         <i class="fas fa-trash"></i>
                                     </a>
