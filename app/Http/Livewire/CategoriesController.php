@@ -15,7 +15,7 @@ class CategoriesController extends Component
     use WithPagination;
 
     public $name, $search, $image, $selected_id, $pageTitle, $componentName;
-    private $pagination = 2;
+    private $pagination = 5;
 
     // Para inicializar propiedades que se van a renderizar en la vista principal del componente
     public function mount(){
@@ -39,4 +39,19 @@ class CategoriesController extends Component
             ->extends('layouts.theme.app')
             ->section('content');
     }
+
+    public function Edit($id){
+        $record = Category::find($id, ['id','name','image']);
+        $this->name = $record->name;
+        $this->selected_id = $record->id;
+        $this->image = null;
+
+        $this->emit('show-modal', 'show modal!');
+    }
+
+    // Para poder cerrar la ventana modal
+    public function resetUI(){
+
+    }
+
 }
