@@ -111,6 +111,22 @@ class CategoriesController extends Component
         $this->emit('category-updated','Categoría Actualizada');
     }
 
+    // Para escuchar los eventos desde el frontend
+    protected $listeners = [
+        'deleteRow' => 'Destroy'
+    ];
+
+    public function Destroy(Category $category){
+        // $category = Category::find($id);
+        // dd($category);
+        $imageName = $category->image; // imagen temporal
+        $category->delete();
+        if ($imageName != null) {
+            unlink('storage/categories/' . $imageName);
+        }
+        $this->resetUI();
+        $this->emit('category-deleted','Categoría Eliminada');
+    }
 
 
     // Para poder cerrar la ventana modal
