@@ -49,9 +49,39 @@ class CategoriesController extends Component
         $this->emit('show-modal', 'show modal!');
     }
 
+    public function Store(){
+        $rules = [
+            'name' => 'required|unique:categories|min:3'
+        ];
+        $messages = [
+            'name.required' => 'Nombre de la categoría es requerido',
+            'name.unique' => 'Ya existe el nombre de la categoría',
+            'name.min' => 'El nombre de la categoría debe tener al menos 3 caracteres',
+        ];
+        $this->validate($rules, $messages);
+
+        $category = Category::create([
+            'name' => $this->name
+        ]);
+
+        $customFilename;
+        if($this->image){
+            $customFilename = uniqid() . '_.' . $this->image->extension();
+            $this->image->storeAs('public/categories', $customFilename);
+            $category->image = $customFilename;
+            $category->save();
+        }
+
+        $this->resetUI(); // Limpiar las cajas de texto del formulario
+        $this->emit('category-added','categoría Registrada');
+    }
+
     // Para poder cerrar la ventana modal
     public function resetUI(){
-
+        $this->name = '';
+        $this->image = null;
+        $this->search = '';
+        $this->selected_id = 0;
     }
 
 }
