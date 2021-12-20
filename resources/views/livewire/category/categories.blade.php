@@ -38,7 +38,7 @@
                                             <i class="fas fa-edit"></i>
                                         </a>
                                         <a href="javascript:void(0);" 
-                                        onclick="Confirm('{{ $category->id }}')"
+                                        onclick="Confirm('{{ $category->id }}', '{{ $category->products->count() }}')"
                                         class="btn btn-dark" title="Delete">
                                             <i class="fas fa-trash"></i>
                                         </a>
@@ -79,7 +79,11 @@
         });
     });
 
-    function Confirm(id){
+    function Confirm(id, products){
+        if(products > 0){
+            swal('NO SE PUEDE ELIMINAR LA CATEGORIA PORQUE TIENE PRODUCTOS RELACIONADOS')
+            return;
+        }
         swal({
             title: 'CONFIRMAR',
             text: '¿CONFIRMAS ELIMINAR EL REGISTRO?',
