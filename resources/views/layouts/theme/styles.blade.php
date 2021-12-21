@@ -48,6 +48,29 @@
             display: block;
         }
     }
+
+    /* Sidebar background color usar !important para que se sobreponga a todos los estilos que ya trae el template */
+    .sidebar-theme #compactSidebar {
+        background: #191e3a!important; 
+    }
+
+    /* sidebar collapse background para el icono hamburguesa del collapse sidebar */
+    .header-container .sidebarCollapse {
+        color: #3B3F5C!important;
+    }
+
+    /* Color de fondo del buscador */
+    .navbar .navbar-item .nav-item form.form-inline input.search-form-control {
+        font-size: 15px;
+        background-color: #3B3F5C!important;
+        padding-right: 40px;
+        padding-top: 12px;
+        border: none;
+        color: #fff;
+        box-shadow: none;
+        border-radius: 30px;
+    }
+
 </style>
 <!-- END GLOBAL MANDATORY STYLES -->
 
