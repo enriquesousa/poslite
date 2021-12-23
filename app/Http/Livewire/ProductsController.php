@@ -134,8 +134,8 @@ class ProductsController extends Component
 
         $product->update([
             'name' => $this->name,
-            'cost' => $this->cost,
-            'price' => $this->price,
+            'cost' => $this->cleanValue($this->cost),
+            'price' => $this->cleanValue($this->price),
             'barcode' => $this->barcode,
             'stock' => $this->stock,
             'alerts' => $this->alerts,
@@ -158,10 +158,16 @@ class ProductsController extends Component
 
         }
 
-    $this->resetUI(); // Limpiar las cajas de texto del formulario
-    $this->emit('product-updated','Producto Actualizado');
+        $this->resetUI(); // Limpiar las cajas de texto del formulario
+        $this->emit('product-updated','Producto Actualizado');
 
    }
+
+   public function cleanValue($value)
+   {
+       return number_format(str_replace(",","",$value),2,'.','');
+   }
+
 
 
    // Para poder cerrar la ventana modal
