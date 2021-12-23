@@ -18,6 +18,7 @@ class CategoriesController extends Component
     private $pagination = 5;
 
     // Para inicializar propiedades que se van a renderizar en la vista principal del componente
+    // es el primer metodo que se ejecuta en los componentes de livewire
     public function mount(){
          $this->pageTitle = 'Listado';
          $this->componentName = 'Categorías';

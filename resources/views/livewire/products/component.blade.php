@@ -18,26 +18,24 @@
                         <thead class="text-white" style="background: #3B3F5C">
                             <tr>
                                 <th class="table-th text-white">DESCRIPCIÓN</th>
-                                <th class="table-th text-white">BARCODE</th>
-                                <th class="table-th text-white">CATEGORÍA</th>
-                                <th class="table-th text-white">PRECIO</th>
-                                <th class="table-th text-white">STOCK</th>
-                                <th class="table-th text-white">INV.MIN</th>
-                                <th class="table-th text-center text-white">IMAGEN</th>
-                                <th class="table-th text-center text-white">ACCIONES</th>
+                                <th class="table-th text-white text-center">BARCODE</th>
+                                <th class="table-th text-white text-center">CATEGORÍA</th>
+                                <th class="table-th text-white text-center">PRECIO</th>
+                                <th class="table-th text-white text-center">STOCK</th>
+                                <th class="table-th text-white text-center">INV.MIN</th>
+                                <th class="table-th text-center text-center text-white">IMAGEN</th>
+                                <th class="table-th text-center text-center text-white">ACCIONES</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($data as $product)
                                 <tr>
-                                    <td>
-                                        <h6>{{ $product->name }}</h6>
-                                        <h6>{{ $product->barcode }}</h6>
-                                        <h6>{{ $product->category }}</h6>
-                                        <h6>{{ $product->price }}</h6>
-                                        <h6>{{ $product->stock }}</h6>
-                                        <h6>{{ $product->alerts }}</h6>
-                                    </td>
+                                    <td><h6 class="text-left">{{ $product->name }}</h6></td>
+                                    <td><h6 class="text-center">{{ $product->barcode }}</h6></td>
+                                    <td><h6 class="text-center">{{ $product->category }}</h6></td>
+                                    <td><h6 class="text-center">{{ $product->price }}</h6></td>
+                                    <td><h6 class="text-center">{{ $product->stock }}</h6></td>
+                                    <td><h6 class="text-center">{{ $product->alerts }}</h6></td>
                                     <td class="text-center">
                                         <span>
                                             <img src="{{ asset('storage/products/'.$product->image) }}" height="70" width="80" class="rounded" alt="no-image">

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 
+use App\Http\Livewire\ProductsController;
 use App\Http\Livewire\CategoriesController;
 
 /*
@@ -27,6 +28,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/blank', [HomeController::class, 'test'])->name('test');
 
 Route::get('categories', CategoriesController::class);
+Route::get('products', ProductsController::class);
 
 
 
