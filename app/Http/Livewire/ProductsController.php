@@ -49,6 +49,11 @@ class ProductsController extends Component
        ])->extends('layouts.theme.app')->section('content');
    }
 
+   public function cleanValue($value)
+   {
+       return number_format(str_replace(",","",$value),2,'.','');
+   }
+
    public function Store()
    {
         $rules = [
@@ -163,19 +168,36 @@ class ProductsController extends Component
 
    }
 
-   public function cleanValue($value)
-   {
-       return number_format(str_replace(",","",$value),2,'.','');
-   }
 
+    // Para escuchar los eventos desde el frontend
+    protected $listeners = [
+        'deleteRow' => 'Destroy'
+    ];
 
+    public function Destroy(Product $product){
+        $imageTemp = $product->image; // imagen temporal
+        $product->delete();
+        if ($imageTemp != null) {
+            if (file_exists('storage/products' . $imageTemp)) {
+                unlink('storage/products' . $imageTemp);
+            }
+        }
+        $this->resetUI();
+        $this->emit('product-deleted','Producto Eliminado');
+    }
 
    // Para poder cerrar la ventana modal
    public function resetUI(){
-        // $this->name = '';
-        // $this->image = null;
-        // $this->search = '';
-        // $this->selected_id = 0;
+        $this->name = '';
+        $this->barcode = '';
+        $this->cost = '';
+        $this->price = '';
+        $this->stock = '';
+        $this->alerts = '';
+        $this->search = '';
+        $this->categoryid = 'Elegir';
+        $this->image = null;
+        $this->selected_id = 0;
     }
 
 }
