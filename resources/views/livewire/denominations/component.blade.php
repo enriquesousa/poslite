@@ -25,10 +25,10 @@
                             @foreach($data as $coin)
                                 <tr>
                                     <td><h6>{{ $coin->type }}</h6></td>
-                                    <td><h6>${{ number_format($coin->value, 2) }}</h6></td>
+                                    <td><h6 class="text-center">${{ number_format($coin->value, 2) }}</h6></td>
                                     <td class="text-center">
                                         <span>
-                                            <img src="{{ asset('storage/coins/'.$coin->image) }}" height="70" width="80" class="rounded" alt="no-image">
+                                            <img src="{{ asset('storage/denominations/'.$coin->image) }}" height="70" width="80" class="rounded" alt="no-image">
                                         </span>
                                     </td>
                                     <td class="text-center">
@@ -71,7 +71,7 @@
             noty(msg)
         });
 
-        window.livewire.on('modal-show', msg =>{
+        window.livewire.on('show-modal', msg =>{
             $('#theModal').modal('show');
         });
         window.livewire.on('modal-hide', msg =>{
