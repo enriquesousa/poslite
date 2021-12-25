@@ -23,7 +23,9 @@
             </li>
         </ul>
         <ul class="navbar-item flex-row navbar-dropdown">
-            <li class="nav-item dropdown language-dropdown more-dropdown">
+
+            {{-- Lenguaje --}}
+            {{-- <li class="nav-item dropdown language-dropdown more-dropdown">
                 <div class="dropdown  custom-dropdown-icon">
                     <a class="dropdown-toggle btn" href="#" role="button" id="customDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="assets/img/ca.png" class="flag-width" alt="flag"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
 
@@ -34,9 +36,10 @@
                         <a class="dropdown-item" data-img-value="ca" data-value="English" href="javascript:void(0);"><img src="assets/img/ca.png" class="flag-width" alt="flag"> English</a>
                     </div>
                 </div>
-            </li>
+            </li> --}}
             
-            <li class="nav-item dropdown message-dropdown">
+            {{-- Mensajes --}}
+            {{-- <li class="nav-item dropdown message-dropdown">
                 <a href="javascript:void(0);" class="nav-link dropdown-toggle" id="messageDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-circle"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg><span class="badge badge-primary"></span>
                 </a>
@@ -99,9 +102,10 @@
                         </a>
                     </div>
                 </div>
-            </li>
+            </li> --}}
 
-            <li class="nav-item dropdown notification-dropdown">
+            {{-- Notificaciones --}}
+            {{-- <li class="nav-item dropdown notification-dropdown">
                 <a href="javascript:void(0);" class="nav-link dropdown-toggle" id="notificationDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg><span class="badge badge-success"></span>
                 </a>
@@ -157,8 +161,9 @@
                         </div>
                     </div>
                 </div>
-            </li>
+            </li> --}}
 
+            {{-- Perfil del Usuario --}}
             <li class="nav-item dropdown user-profile-dropdown  order-lg-0 order-1">
                 <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="userProfileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {{-- <img src="assets/img/90x90.jpg" alt="admin-profile" class="img-fluid"> --}}
@@ -196,6 +201,7 @@
                     </div>
                 </div>
             </li>
+
         </ul>
     </header>
 </div>
