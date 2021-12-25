@@ -2,11 +2,12 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\HomeController;
-use App\Http\Livewire\ProductsController;
+
 use App\Http\Livewire\CategoriesController;
+use App\Http\Livewire\ProductsController;
 use App\Http\Livewire\CoinsController;
+use App\Http\Livewire\PosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,7 @@ Route::get('/blank', [HomeController::class, 'test'])->name('test');
 Route::get('categories', CategoriesController::class);
 Route::get('products', ProductsController::class);
 Route::get('coins', CoinsController::class);
+Route::get('pos', PosController::class);
 
 
 
