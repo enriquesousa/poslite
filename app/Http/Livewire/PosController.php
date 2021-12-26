@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Product;
 use Livewire\Component;
 use App\Models\Denomination;
+use Illuminate\Support\Facades\DB;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
 
 class PosController extends Component
@@ -152,6 +153,81 @@ class PosController extends Component
         $this->total = Cart::getTotal();
         $this->itemsQuantity = Cart::getTotalQuantity();
         $this->emit('scan-ok', 'Cantidad Actualizada');
+    }
+
+    public function clearCart()
+    {
+        Cart::clear();
+        $this->efectivo = 0;
+        $this->change = 0;
+
+        $this->total = Cart::getTotal();
+        $this->itemsQuantity = Cart::getTotalQuantity();
+        $this->emit('scan-ok', 'Carrito Vacío');
+    }
+
+    public function saveSale()
+    {
+        if ($this->total <= 0) {
+            $this->emit('sale-error', 'AGREGA PRODUCTOS A LA VENTA');
+            return;
+        }
+        if ($this->efectivo <= 0) {
+            $this->emit('sale-error', 'INGRESA EL EFECTIVO');
+            return;
+        }
+        if ($this->total > $this->efectivo) {
+            $this->emit('sale-error', 'EL EFECTIVO DEBE DE SER MAYOR O IGUAL AL TOTAL');
+            return;
+        }
+
+        DB::beginTransaction();
+        try {
+            $sale = Sale::create([
+                'total' => $this->total,
+                'items' => $this->itemsQuantity,
+                'cash' => $this->efectivo,
+                'change' => $this->change,
+                'user_id' => Auth()->user()->id
+            ]);
+
+            if (sale) {
+                $items = Cart::getContent();
+                foreach ($items as $item) {
+                    SaleDetail::create([
+                        'price' => $item->price,
+                        'quantity' => $item->quantity,
+                        'product_id' => $item->id,
+                        'sale_' => $sale->id
+                    ]);
+                    //update stock
+                    $product = Product::find($item->id);
+                    $product->stock = $product->stock - $item->quantity;
+                    $product->save();
+                }
+            }
+
+            // Confirmar la transaccion en la base de datos
+            DB::commit();
+
+            // Limpiar el carrito y reinicializar las variables
+            Cart::clear();
+            $this->efectivo = 0;
+            $this->change = 0;
+            $this->total = Cart::getTotal();
+            $this->itemsQuantity = Cart::getTotalQuantity();
+            $this->emit('scan-ok', 'Venta registrada con éxito');
+            $this->emit('print-ticket', $sale->id);
+        } catch (Exception $e) {
+            DB::rollback();
+            $this->emit('sale-error', $e->getMessage());
+        }
+    }
+
+    public function printTicket($sale)
+    {
+        // Al redirigir a esta url el plugin de c# nos ayudara a imprimir el ticket de venta!
+        return Redirect::to("print://$sale->id");
     }
 
 }
