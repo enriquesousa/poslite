@@ -2,9 +2,10 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Product;
 use Livewire\Component;
-use Darryldecode\Cart\Facades\CartFacade as Cart;
 use App\Models\Denomination;
+use Darryldecode\Cart\Facades\CartFacade as Cart;
 
 class PosController extends Component
 {
@@ -40,6 +41,41 @@ class PosController extends Component
         'clearCart' => 'clearCart',
         'saveSale' => 'saveSale'
     ];
+
+    public function ScanCode($barcode, $cant = 1)
+    {
+        $product = Product::where('barcode', $barcode)->first();
+        
+        if ($product == null || empty($empty)) {
+            $this->emit('scan-notfound', 'El producto no está registrado');
+        }else{
+            if ($this->InCart($product->id)) {
+                $this->increaseQty($product->id);
+                return;
+            }
+            if ($product->stock < 1) {
+                $this->emit('no-stock', 'Stock insuficiente :/');
+                return;
+            }
+
+            //Agregamos producto al carrito
+            Cart::add($product->id, $product->name, $product->price, $cant, $product->image);
+            $this->total = Cart::getTotal();
+
+            $this->emit('scan-ok', 'Producto agregado');
+        }
+    }
+
+    // Validar si el ID del producto ya existe en el Carrito
+    public function InCart($productId)
+    {
+        $exist = Cart::get($productId);
+        if ($exist) {
+            return true;
+        }else{
+            return false;
+        }
+    }
 
 
 }
