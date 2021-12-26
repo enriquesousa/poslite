@@ -61,7 +61,6 @@ class PosController extends Component
             //Agregamos producto al carrito
             Cart::add($product->id, $product->name, $product->price, $cant, $product->image);
             $this->total = Cart::getTotal();
-
             $this->emit('scan-ok', 'Producto agregado');
         }
     }
@@ -75,6 +74,33 @@ class PosController extends Component
         }else{
             return false;
         }
+    }
+
+    // Actualizar la cantidad de productos en la existencia del carrito
+    public function increaseQty($productId, $cant = 1)
+    {
+        $title = '';
+        $product = Product::find($productId);
+        
+        $exist = Cart::get($productId);
+        if ($exist) {
+            $title = 'Cantidad actualizada';
+        }else{
+            $title = 'Producto agregado';
+        }
+
+        if ($exist) {
+            if ($product->stock < ($cant + $exist->quantity)) {
+                $this->emit('no-stock', 'Stock insuficiente :/');
+                return;
+            }
+        }
+
+        // Nota: si el producto ya existe, simplemente el metodo incrementa la cant
+        Cart::add($product->id, $product->name, $product->price, $cant, $product->image);
+        $this->total = Cart::getTotal();
+        $this->itemsQuantity = Cart::getTotalQuantity();
+        $this->emit('scan-ok', $title);
     }
 
 
