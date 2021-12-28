@@ -45,7 +45,7 @@ class PosController extends Component
 
     public function ScanCode($barcode, $cant = 1)
     {
-        dd($barcode);
+        // dd($barcode);
         
         $product = Product::where('barcode', $barcode)->first();
         

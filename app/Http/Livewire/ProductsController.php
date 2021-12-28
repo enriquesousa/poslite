@@ -78,8 +78,8 @@ class ProductsController extends Component
 
         $product = Product::create([
             'name' => $this->name,
-            'cost' => $this->cost,
-            'price' => $this->price,
+            'cost' => $this->cleanValue($this->cost),
+            'price' => $this->cleanValue($this->price),
             'barcode' => $this->barcode,
             'stock' => $this->stock,
             'alerts' => $this->alerts,
